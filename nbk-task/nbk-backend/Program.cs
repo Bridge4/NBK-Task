@@ -2,17 +2,16 @@ using System;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
-using var db = new ManagerContext();
-
+/*
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 // Note: This sample requires the database to be created before running.
+using var db = new ManagerContext();
 Console.WriteLine($"Database path: {db.DbPath}.");
 
 //Create
 //Console.WriteLine("Inserting a new customer");
-/*db.Add(new Customer {   CustomerNumber = 1, 
+db.Add(new Customer {   CustomerNumber = 1, 
                         Age = 23, 
                         CustomerName = "Abdul Alhashemi", 
                         DateOfBirth = new DateOnly(2000, 7, 2), 
@@ -25,7 +24,7 @@ db.Add(new Customer {   CustomerNumber = 2,
                         Gender = 'M'});
 
 db.SaveChanges();
-*/
+
 /*static void addCustomer(int Number, int CustomerAge, String Name, 
                         DateOnly DOB, Char CustomerGender) 
 {
@@ -39,8 +38,6 @@ db.SaveChanges();
     });
     db.SaveChanges();
 }
-*/
-
 
 // Read
 Console.WriteLine("Querying for a customer");
@@ -48,17 +45,25 @@ var customer = db.Customers
     .OrderBy(b => b.CustomerNumber)
     .First();
 
+db.Add(new Customer{
+    CustomerNumber = 123,
+    Age = 32,
+    CustomerName = "Sayed",
+    DateOfBirth = new DateOnly(2000,01,02),
+    Gender = 'M'
+});
+db.SaveChanges();
 // Update
-/*
+
 Console.WriteLine("Updating the customer's customer name");
 customer.CustomerName = "Morpheus";
 db.SaveChanges();
-*/
+
 // Delete
-/*Console.WriteLine("Delete the customer");
+Console.WriteLine("Delete the customer");
 db.Remove(customer);
 db.SaveChanges();
-*/
+
 
 static void DeleteCustomer(int id)
 {
@@ -68,73 +73,12 @@ static void DeleteCustomer(int id)
     db.SaveChanges();
 }
 
-static void UpdateCustomerName(int id, string NewName)
-{
-    using var db = new ManagerContext();
-    // Query for customer, if customer found, update, otherwise throw exception or something
-    var customer = db.Customers.Find(id);
-    if (customer != null)
-    {
-        customer.CustomerName = NewName;
-        db.SaveChanges();
-    }
-    else
-    {
-        Console.WriteLine("Customer does not exist!\n");
-    }
-}
-
-static void UpdateCustomerDOB(int id, DateOnly NewDOB)
-{
-    using var db = new ManagerContext();
-    var customer = db.Customers.Find(id);
-    if (customer != null)
-    {
-        customer.DateOfBirth = NewDOB;
-        db.SaveChanges();
-    }
-    else
-    {
-        Console.WriteLine("Customer does not exist!\n");
-    }
-}
-
-static void UpdateCustomerGender(int id, char NewGender)
-{
-    using var db = new ManagerContext();
-    var customer = db.Customers.Find(id);
-    if (customer != null)
-    {
-        customer.Gender = NewGender;
-        db.SaveChanges();
-    }
-    else
-    {
-        Console.WriteLine("Customer does not exist!\n");
-    }
-}
-
-static void UpdateCustomerAge(int id, int NewAge)
-{
-    using var db = new ManagerContext();
-    var customer = db.Customers.Find(id);
-    if (customer != null)
-    {
-        customer.Age = NewAge;
-        db.SaveChanges();
-    }
-    else
-    {
-        Console.WriteLine("Customer does not exist!\n");
-    }
-}
-
 static void AddHandler(string jsonString) 
 {
-    Console.WriteLine(jsonString);
+    Console.WriteLine(jsonString );
 }
 
-app.MapGet("customers/get", () => db.Customers);
+app.MapGet("customers/get", () => "HELLO!");
 
 app.MapGet("customers/getid/{id}", 
             (int id) => db.Customers.SingleOrDefault(customer => customer.CustomerNumber == id));
@@ -146,4 +90,62 @@ app.MapPost("customers/add_customer/",
             => AddHandler(jsonString));
 
 
+app.Run();
+*/
+
+
+var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<CustomerDB>(opt => opt.UseSqlite());
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+var app = builder.Build();
+
+app.MapGet("/customers", async (CustomerDB db) =>
+    await db.Customers.ToListAsync());
+
+/*
+app.MapGet("/todoitems/customer_name", async (CustomerDB db) =>
+    await db.Customers.Where(c => c.CustomerName).ToListAsync());
+*/
+
+app.MapGet("/customers/{id}", async (int id, CustomerDB db) =>
+    await db.Customers.FindAsync(id)
+        is Customer customer
+            ? Results.Ok(customer)
+            : Results.NotFound());
+
+app.MapPost("/customers", async (Customer customer, CustomerDB db) =>
+{
+    db.Customers.Add(customer);
+    await db.SaveChangesAsync();
+
+    return Results.Created($"/todoitems/{customer.CustomerNumber}", customer);
+});
+
+
+/*app.MapPut("/todoitems/{id}", async (int id, Todo inputTodo, TodoDb db) =>
+{
+    var todo = await db.Todos.FindAsync(id);
+
+    if (todo is null) return Results.NotFound();
+
+    todo.Name = inputTodo.Name;
+    todo.IsComplete = inputTodo.IsComplete;
+
+    await db.SaveChangesAsync();
+
+    return Results.NoContent();
+});
+
+app.MapDelete("/todoitems/{id}", async (int id, TodoDb db) =>
+{
+    if (await db.Todos.FindAsync(id) is Todo todo)
+    {
+        db.Todos.Remove(todo);
+        await db.SaveChangesAsync();
+        return Results.NoContent();
+    }
+
+    return Results.NotFound();
+});
+*/
 app.Run();

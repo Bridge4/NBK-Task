@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "npEWm2WJlP4EhMt+NWIla6xF61V32OTQDwZ6XxQ0q/UOYu3Mp6R+8hcflIH0qEKlVyZIkKWaJKFeyEmut2gIMg==",
+  "dgSpecHash": "ly3IhSnLipJe6PgbYL2LjEnNeXgLxgdbaCZywJuDWX4HiVN7c0040cZO7Xdcwe5Ot6MBIyQ3Fb6mMVoI7fFpoQ==",
   "success": true,
   "projectFilePath": "/Users/mason/Desktop/2024Dev/NBK/NBK-Task/nbk-task/nbk-backend/nbk-backend.csproj",
   "expectedPackageFiles": [
     "/Users/mason/.nuget/packages/azure.core/1.35.0/azure.core.1.35.0.nupkg.sha512",
     "/Users/mason/.nuget/packages/azure.identity/1.10.3/azure.identity.1.10.3.nupkg.sha512",
     "/Users/mason/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
+    "/Users/mason/.nuget/packages/microsoft.aspnetcore.diagnostics.entityframeworkcore/8.0.3/microsoft.aspnetcore.diagnostics.entityframeworkcore.8.0.3.nupkg.sha512",
     "/Users/mason/.nuget/packages/microsoft.bcl.asyncinterfaces/6.0.0/microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
     "/Users/mason/.nuget/packages/microsoft.codeanalysis.analyzers/3.3.3/microsoft.codeanalysis.analyzers.3.3.3.nupkg.sha512",
     "/Users/mason/.nuget/packages/microsoft.codeanalysis.common/4.5.0/microsoft.codeanalysis.common.4.5.0.nupkg.sha512",
@@ -21,6 +22,7 @@
     "/Users/mason/.nuget/packages/microsoft.entityframeworkcore.abstractions/8.0.3/microsoft.entityframeworkcore.abstractions.8.0.3.nupkg.sha512",
     "/Users/mason/.nuget/packages/microsoft.entityframeworkcore.analyzers/8.0.3/microsoft.entityframeworkcore.analyzers.8.0.3.nupkg.sha512",
     "/Users/mason/.nuget/packages/microsoft.entityframeworkcore.design/8.0.3/microsoft.entityframeworkcore.design.8.0.3.nupkg.sha512",
+    "/Users/mason/.nuget/packages/microsoft.entityframeworkcore.inmemory/8.0.3/microsoft.entityframeworkcore.inmemory.8.0.3.nupkg.sha512",
     "/Users/mason/.nuget/packages/microsoft.entityframeworkcore.relational/8.0.3/microsoft.entityframeworkcore.relational.8.0.3.nupkg.sha512",
     "/Users/mason/.nuget/packages/microsoft.entityframeworkcore.sqlite/8.0.3/microsoft.entityframeworkcore.sqlite.8.0.3.nupkg.sha512",
     "/Users/mason/.nuget/packages/microsoft.entityframeworkcore.sqlite.core/8.0.3/microsoft.entityframeworkcore.sqlite.core.8.0.3.nupkg.sha512",
