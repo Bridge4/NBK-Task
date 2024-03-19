@@ -128,11 +128,29 @@ static void UpdateCustomerAge(int id, int NewAge)
     }
 }
 
+static void AddHandler(int id, string name, int age, DateOnly DOB, char gender) 
+{
+    using var db = new ManagerContext();
+
+    db.Add(new Customer {   CustomerNumber = id, 
+                            Age = age, 
+                            CustomerName = name, 
+                            DateOfBirth = DOB, 
+                            Gender = gender});
+
+    db.SaveChanges();
+}
+
 app.MapGet("customers/get", () => db.Customers);
 
 app.MapGet("customers/getid/{id}", 
             (int id) => db.Customers.SingleOrDefault(customer => customer.CustomerNumber == id));
 
 app.MapDelete("customers/deleteid/{id}", (int id) => DeleteCustomer(id));
+
+app.MapPost("customers/post/{id, name, age, DOB, gender}", 
+            (int id, string name, int age, 
+            DateOnly DOB, char gender) => AddHandler(id, name, age, DOB, gender));
+
 
 app.Run();
