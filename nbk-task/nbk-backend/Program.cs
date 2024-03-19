@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 /*
@@ -93,11 +94,24 @@ app.MapPost("customers/add_customer/",
 app.Run();
 */
 
-
+var  MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy  =>
+                      {
+                          policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                      });
+});
+
 builder.Services.AddDbContext<CustomerDB>(opt => opt.UseSqlite());
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 var app = builder.Build();
+app.UseCors(MyAllowSpecificOrigins);
+
+
 
 app.MapGet("/customers", async (CustomerDB db) =>
     await db.Customers.ToListAsync());
@@ -113,12 +127,13 @@ app.MapGet("/customers/{id}", async (int id, CustomerDB db) =>
             ? Results.Ok(customer)
             : Results.NotFound());
 
+
 app.MapPost("/customers", async (Customer customer, CustomerDB db) =>
 {
     db.Customers.Add(customer);
     await db.SaveChangesAsync();
 
-    return Results.Created($"/todoitems/{customer.CustomerNumber}", customer);
+    return Results.Created($"/customers/{customer.CustomerNumber}", customer);
 });
 
 

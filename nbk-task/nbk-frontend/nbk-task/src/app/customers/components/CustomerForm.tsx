@@ -21,16 +21,27 @@ import {
     PopoverContent,
     PopoverTrigger,
   } from "@/components/ui/popover"
-  import { CalendarIcon } from "@radix-ui/react-icons"
+import { CalendarIcon } from "@radix-ui/react-icons"
+import { useEffect } from "react";
+/*
 
+{
+    "customerNumber": 133,
+    "customerName": "Callum",
+    "age": 3323,
+    "dateOfBirth": "1900-01-02",
+    "gender": "M"
+}
 
+*/
 const formSchema = z.object({
     customerNumber: z.coerce.number(),
     customerName: z.string(),
-    customerAge: z.coerce.number(),
-    customerDOB: z.coerce.date(),
-    customerGender: z.string()
+    age: z.coerce.number(),
+    dateOfBirth: z.coerce.date() || z.string(),
+    gender: z.string()
 })
+
 
 export function CustomerForm(){
     const form = useForm<z.infer<typeof formSchema>>({
@@ -43,28 +54,30 @@ export function CustomerForm(){
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
         // {id, name, age, DOB, gender}
-        /*
-        const res = await fetch('http://localhost:5230/customers/post/' 
-        + String(values.customerNumber) + ','
-        + String(values.customerName)+ ','
-        + String(values.customerAge)+ ','
-        + String(values.customerDOB)+ ','
-        + String(values.customerGender))
-        */
-        fetch('http://localhost:5230/customers/add_customer', {
+    
+        fetch('http://localhost:5230/customers/', {
             method: 'POST',
-            headers: {"Content-Type": "application/json"},
-            body: JSON.stringify(values),
-            mode: 'no-cors'
-        })
-        console.log(values)
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                customerNumber: values.customerNumber,
+                customerName: values.customerName,
+                age: values.age,
+                dateOfBirth: values.dateOfBirth.getFullYear() + '-'
+                + ('0' + (values.dateOfBirth.getMonth()+1)).slice(-2) + '-'
+                + ('0' + values.dateOfBirth.getDate()).slice(-2),
+                gender: values.gender
+            })
+        }).then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error(error));
     }
     
     return (
         <Form {...form} >
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 <FormField
-                
                 control={form.control}
                 name="customerNumber"
                 render={({ field }) => (
@@ -100,7 +113,7 @@ export function CustomerForm(){
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 <FormField
                 control={form.control}
-                name="customerAge"
+                name="age"
                 render={({ field }) => (
                     <FormItem>
                     <FormLabel>Age</FormLabel>
@@ -117,7 +130,7 @@ export function CustomerForm(){
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 <FormField
                 control={form.control}
-                name="customerDOB"
+                name="dateOfBirth"
                 render={({ field }) => (
                     <FormItem className="flex flex-col">
                     <FormLabel>Date of birth</FormLabel>
@@ -162,7 +175,7 @@ export function CustomerForm(){
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 <FormField
                 control={form.control}
-                name="customerGender"
+                name="gender"
                 render={({ field }) => (
                     <FormItem>
                     <FormLabel>Gender</FormLabel>
