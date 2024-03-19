@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button"
 import { ColumnDef } from "@tanstack/react-table"
+import { AddCustomerDialog } from "./components/AddCustomerDialog"
 
 export type Customer = {
   customerNumber: number
@@ -38,7 +39,7 @@ export const columns: ColumnDef<Customer>[] = [
         cell: ({ row }) => {
             return (
                 <div>
-                    <Button>Edit</Button>
+                    <AddCustomerDialog></AddCustomerDialog>
                     <Button variant={"destructive"}>Delete</Button>
                 </div>
             )

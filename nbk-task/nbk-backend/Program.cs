@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 using var db = new ManagerContext();
@@ -128,17 +129,9 @@ static void UpdateCustomerAge(int id, int NewAge)
     }
 }
 
-static void AddHandler(int id, string name, int age, DateOnly DOB, char gender) 
+static void AddHandler(string jsonString) 
 {
-    using var db = new ManagerContext();
-
-    db.Add(new Customer {   CustomerNumber = id, 
-                            Age = age, 
-                            CustomerName = name, 
-                            DateOfBirth = DOB, 
-                            Gender = gender});
-
-    db.SaveChanges();
+    Console.WriteLine(jsonString);
 }
 
 app.MapGet("customers/get", () => db.Customers);
@@ -148,9 +141,9 @@ app.MapGet("customers/getid/{id}",
 
 app.MapDelete("customers/deleteid/{id}", (int id) => DeleteCustomer(id));
 
-app.MapPost("customers/post/{id, name, age, DOB, gender}", 
-            (int id, string name, int age, 
-            DateOnly DOB, char gender) => AddHandler(id, name, age, DOB, gender));
+app.MapPost("customers/add_customer/", 
+            ([FromBody] string jsonString) 
+            => AddHandler(jsonString));
 
 
 app.Run();

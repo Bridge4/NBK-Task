@@ -22,42 +22,56 @@ import {
     PopoverTrigger,
   } from "@/components/ui/popover"
   import { CalendarIcon } from "@radix-ui/react-icons"
-import { DatePickerForm } from "./calendar";
-
 
 
 const formSchema = z.object({
-    customerNumber: z.number(),
+    customerNumber: z.coerce.number(),
     customerName: z.string(),
-    customerAge: z.number(),
-    customerDOB: z.date(),
+    customerAge: z.coerce.number(),
+    customerDOB: z.coerce.date(),
     customerGender: z.string()
 })
 
 export function CustomerForm(){
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-
+        
     })
 
     // 2. Define a submit handler.
-    function onSubmit(values: z.infer<typeof formSchema>) {
+    function onSubmit(values: z.infer<typeof formSchema>){
         // Do something with the form values.
         // ✅ This will be type-safe and validated.
+        // {id, name, age, DOB, gender}
+        /*
+        const res = await fetch('http://localhost:5230/customers/post/' 
+        + String(values.customerNumber) + ','
+        + String(values.customerName)+ ','
+        + String(values.customerAge)+ ','
+        + String(values.customerDOB)+ ','
+        + String(values.customerGender))
+        */
+        fetch('http://localhost:5230/customers/add_customer', {
+            method: 'POST',
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(values),
+            mode: 'no-cors'
+        })
         console.log(values)
     }
-
+    
     return (
-        <Form {...form}>
+        <Form {...form} >
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 <FormField
+                
                 control={form.control}
                 name="customerNumber"
                 render={({ field }) => (
                     <FormItem>
                     <FormLabel>Number</FormLabel>
                     <FormControl>
-                        <Input placeholder="shadcn" {...field} />
+                        <Input placeholder="shadcn" {...field}/>
                     </FormControl>
                     <FormDescription>
                     </FormDescription>
@@ -161,6 +175,7 @@ export function CustomerForm(){
                     </FormItem>
                 )}
                 />
+            <Button type="submit">Submit</Button>
             </form>
         </Form>
 
