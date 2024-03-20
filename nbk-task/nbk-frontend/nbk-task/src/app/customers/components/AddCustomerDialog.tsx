@@ -33,7 +33,6 @@ import {
   } from "@/components/ui/popover"
 import { CalendarIcon } from "@radix-ui/react-icons"
 
-
 const formSchema = z.object({
     customerNumber: z.coerce.number(),
     customerName: z.string(),
@@ -49,10 +48,6 @@ export function AddCustomerDialog() {
 
     // 2. Define a submit handler.
     function onSubmit(values: z.infer<typeof formSchema>){
-        // Do something with the form values.
-        // ✅ This will be type-safe and validated.
-        // {id, name, age, DOB, gender}
-    
         fetch('http://localhost:5230/customers/', {
             method: 'POST',
             headers: {
@@ -74,7 +69,7 @@ export function AddCustomerDialog() {
     return (
         <Dialog>
         <DialogTrigger asChild>
-            <Button> Add Customer</Button>
+            <Button className="container mx-auto py-5"> Add Customer</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>

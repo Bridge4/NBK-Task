@@ -1,6 +1,10 @@
+
 import { Customer, columns } from "./columns"
 import { DataTable } from "./data-table"
 import { AddCustomerDialog } from "./components/AddCustomerDialog"
+import { withPageAuthRequired } from '@auth0/nextjs-auth0';
+import { getSession } from '@auth0/nextjs-auth0';
+import { redirect } from 'next/navigation'
 
 async function getData(): Promise<Customer[]> {
     const res = await fetch('http://localhost:5230/customers/', {
@@ -15,12 +19,18 @@ async function getData(): Promise<Customer[]> {
 }
 
 export default async function DemoPage() {
+    const user = await getSession()
+
     var data = await getData()
     console.log(data)
     return (
-        <div className="container mx-auto py-10">
+        user && <div className="container mx-auto py-10">
             <DataTable columns={columns} data={data}></DataTable>
             <AddCustomerDialog></AddCustomerDialog>
         </div>
     )
+    
+    
 }
+
+//export const getServerSideProps = withPageAuthRequired();

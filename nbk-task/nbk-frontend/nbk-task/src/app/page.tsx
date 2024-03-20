@@ -1,7 +1,7 @@
 import { Customer, columns } from "./customers/columns"
 import { DataTable } from "./customers/data-table"
 import { AddCustomerDialog } from "./customers/components/AddCustomerDialog"
-import { useState,  useEffect } from "react"
+
 async function getData(): Promise<Customer[]> {
   const res = await fetch('http://localhost:5230/customers/', {
       method: "GET",
@@ -15,13 +15,14 @@ async function getData(): Promise<Customer[]> {
 }
 
 export default async function Home() {
-
     var data = await getData()
     console.log(data)
     return (
         <div className="container mx-auto py-10">
-            <DataTable columns={columns} data={data}></DataTable>
-            <AddCustomerDialog></AddCustomerDialog>
+            <a className="button__login" href="/api/auth/login">
+            Log In
+            </a>
         </div>
     );
+    
 }
