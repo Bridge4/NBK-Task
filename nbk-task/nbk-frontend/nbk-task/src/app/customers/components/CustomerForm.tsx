@@ -23,17 +23,8 @@ import {
   } from "@/components/ui/popover"
 import { CalendarIcon } from "@radix-ui/react-icons"
 import { useEffect } from "react";
-/*
+import { useRouter } from "next/router";
 
-{
-    "customerNumber": 133,
-    "customerName": "Callum",
-    "age": 3323,
-    "dateOfBirth": "1900-01-02",
-    "gender": "M"
-}
-
-*/
 const formSchema = z.object({
     customerNumber: z.coerce.number(),
     customerName: z.string(),
@@ -45,8 +36,7 @@ const formSchema = z.object({
 
 export function CustomerForm(){
     const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
-        
+        resolver: zodResolver(formSchema), 
     })
 
     // 2. Define a submit handler.
