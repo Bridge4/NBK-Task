@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("nbk-backend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b6ef3a4f7fc8ac8e383ea6f5cb7f66db2a8c5746")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d3b58834fe8d11ea5486e2078b11d4e7dea7090f")]
 [assembly: System.Reflection.AssemblyProductAttribute("nbk-backend")]
 [assembly: System.Reflection.AssemblyTitleAttribute("nbk-backend")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -4450,24 +4450,26 @@
     ]
   },
   "packageFolders": {
-    "/Users/mason/.nuget/packages/": {}
+    "C:\\Users\\abdul\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/mason/Desktop/2024Dev/NBK/NBK-Task/nbk-task/nbk-backend/nbk-backend.csproj",
+      "projectUniqueName": "C:\\dev\\NBK-Task\\nbk-task\\nbk-backend\\nbk-backend.csproj",
       "projectName": "nbk-backend",
-      "projectPath": "/Users/mason/Desktop/2024Dev/NBK/NBK-Task/nbk-task/nbk-backend/nbk-backend.csproj",
-      "packagesPath": "/Users/mason/.nuget/packages/",
-      "outputPath": "/Users/mason/Desktop/2024Dev/NBK/NBK-Task/nbk-task/nbk-backend/obj/",
+      "projectPath": "C:\\dev\\NBK-Task\\nbk-task\\nbk-backend\\nbk-backend.csproj",
+      "packagesPath": "C:\\Users\\abdul\\.nuget\\packages\\",
+      "outputPath": "C:\\dev\\NBK-Task\\nbk-task\\nbk-backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/mason/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\abdul\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -4533,7 +4535,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.203/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

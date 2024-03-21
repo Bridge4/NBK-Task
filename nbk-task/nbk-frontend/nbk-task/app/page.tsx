@@ -3,9 +3,7 @@ import { DataTable } from "./data-table"
 import { AddCustomerDialog } from "../components/AddCustomerDialog"
 import { withPageAuthRequired, getSession, handleLogout } from '@auth0/nextjs-auth0';
 import { Button } from "../components/ui/button";
-import { NextRequest, NextResponse } from "next/server";
-import { Redirect } from "next";
-import Link from "next/link";
+
 async function getData(): Promise<Customer[]> {
     const res = await fetch('http://localhost:5230/customers/', {
         method: "GET",
@@ -18,13 +16,9 @@ async function getData(): Promise<Customer[]> {
     return res.json()
 }
 
-function logoutHandler(){
-    
-}
 
 export default withPageAuthRequired(
-    async function SSRPage() {
-        const user = await getSession()
+    async function CustomerManager() {
         var data = await getData()
         console.log(data)
         return (
