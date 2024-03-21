@@ -2,10 +2,10 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import {z} from "zod";
-import { Button } from "@/components/ui/button"
-import { cn } from "@/lib/utils"
+import { Button } from "./ui/button"
+import { cn } from "../lib/utils"
 import { format } from "date-fns"
-import { Calendar } from "@/components/ui/calendar"
+import { Calendar } from "./ui/calendar"
 import {
   Form,
   FormControl,
@@ -14,42 +14,38 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
+} from "./ui/form"
+import { Input } from "./ui/input"
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
-  } from "@/components/ui/popover"
+  } from "./ui/popover"
 import { CalendarIcon } from "@radix-ui/react-icons"
 
 const formSchema = z.object({
+    customerNumber: z.coerce.number(),
     customerName: z.string(),
     age: z.coerce.number(),
     dateOfBirth: z.coerce.date() || z.string(),
     gender: z.string()
 })
 
-export function EditForm({...props}){
+export function CustomerForm(){
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema), 
-        defaultValues:
-        {
-            customerName: props.name,
-            age: props.age,
-            dateOfBirth: props.DOB,
-            gender: props.gender
-        }
     })
 
+
     function onSubmit(values: z.infer<typeof formSchema>){
-        fetch("http://localhost:5230/customers/" + props.customerNumber, {
-            method: 'PUT',
+    
+        fetch('http://localhost:5230/customers/', {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                customerNumber: props.customerNumber,
+                customerNumber: values.customerNumber,
                 customerName: values.customerName,
                 age: values.age,
                 dateOfBirth: values.dateOfBirth.getFullYear() + '-'
@@ -65,7 +61,24 @@ export function EditForm({...props}){
     
     return (
         <Form {...form} >
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8" >
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                <FormField
+                control={form.control}
+                name="customerNumber"
+                render={({ field }) => (
+                    <FormItem>
+                    <FormLabel>Number</FormLabel>
+                    <FormControl>
+                        <Input placeholder="shadcn" {...field}/>
+                    </FormControl>
+                    <FormDescription>
+                    </FormDescription>
+                    <FormMessage />
+                    </FormItem>
+                )}
+                />
+            </form>
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 <FormField
                 control={form.control}
                 name="customerName"
@@ -73,7 +86,7 @@ export function EditForm({...props}){
                     <FormItem>
                     <FormLabel>Name</FormLabel>
                     <FormControl>
-                        <Input {...field} />
+                        <Input placeholder="shadcn" {...field} />
                     </FormControl>
                     <FormDescription>
                     </FormDescription>
@@ -82,7 +95,7 @@ export function EditForm({...props}){
                 )}
                 />
             </form>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8" >
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 <FormField
                 control={form.control}
                 name="age"
@@ -90,7 +103,7 @@ export function EditForm({...props}){
                     <FormItem>
                     <FormLabel>Age</FormLabel>
                     <FormControl>
-                        <Input {...field} />
+                        <Input placeholder="shadcn" {...field} />
                     </FormControl>
                     <FormDescription>
                     </FormDescription>
@@ -99,7 +112,7 @@ export function EditForm({...props}){
                 )}
                 />
             </form>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8" >
+            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                 <FormField
                 control={form.control}
                 name="dateOfBirth"
@@ -152,7 +165,7 @@ export function EditForm({...props}){
                     <FormItem>
                     <FormLabel>Gender</FormLabel>
                     <FormControl>
-                        <Input {...field} />
+                        <Input placeholder="shadcn" {...field} />
                     </FormControl>
                     <FormDescription>
                     </FormDescription>

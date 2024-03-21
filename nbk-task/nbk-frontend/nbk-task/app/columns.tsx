@@ -1,9 +1,9 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
+import { Button } from "../components/ui/button"
 import { ColumnDef } from "@tanstack/react-table"
-import { AddCustomerDialog } from "./components/AddCustomerDialog"
-import { EditDialog } from "./components/EditDialog"
+import { AddCustomerDialog } from "../components/AddCustomerDialog"
+import { EditDialog } from "../components/EditDialog"
 import { useState } from "react"
 
 export type Customer = {
