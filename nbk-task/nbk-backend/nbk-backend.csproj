@@ -17,5 +17,6 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.3" />
   </ItemGroup>
+  <ItemGroup><None Update="Data/nbk-database.db" CopyToOutputDirectory="PreserveNewest"  /></ItemGroup>
 
 </Project>

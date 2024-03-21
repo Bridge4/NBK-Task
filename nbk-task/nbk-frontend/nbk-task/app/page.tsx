@@ -28,13 +28,17 @@ export default withPageAuthRequired(
         var data = await getData()
         console.log(data)
         return (
+            <>
+                <Button asChild>
+                    <a href="/api/auth/logout">Logout</a>
+                </Button>
             <div className="container mx-auto py-10">
+                
                 <DataTable columns={columns} data={data}></DataTable>
                 <AddCustomerDialog></AddCustomerDialog>
-                <Button asChild>
-                    <Link href="/">Logout</Link>
-                </Button>
+                
             </div>
+            </>
         )
     },
     { returnTo: '/api/auth/login' }

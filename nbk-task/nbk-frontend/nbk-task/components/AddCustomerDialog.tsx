@@ -69,7 +69,7 @@ export function AddCustomerDialog() {
     return (
         <Dialog>
         <DialogTrigger asChild>
-            <Button className="container mx-auto py-5"> Add Customer</Button>
+            <Button className="container mx-auto py-5">+</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
             <DialogHeader>
@@ -87,7 +87,7 @@ export function AddCustomerDialog() {
                             <FormItem>
                             <FormLabel>Number</FormLabel>
                             <FormControl>
-                                <Input placeholder="shadcn" {...field}/>
+                                <Input {...field}/>
                             </FormControl>
                             <FormDescription>
                             </FormDescription>
@@ -104,7 +104,7 @@ export function AddCustomerDialog() {
                             <FormItem>
                             <FormLabel>Name</FormLabel>
                             <FormControl>
-                                <Input placeholder="shadcn" {...field} />
+                                <Input {...field} />
                             </FormControl>
                             <FormDescription>
                             </FormDescription>
@@ -121,7 +121,7 @@ export function AddCustomerDialog() {
                             <FormItem>
                             <FormLabel>Age</FormLabel>
                             <FormControl>
-                                <Input placeholder="shadcn" {...field} />
+                                <Input {...field} />
                             </FormControl>
                             <FormDescription>
                             </FormDescription>
@@ -183,7 +183,7 @@ export function AddCustomerDialog() {
                             <FormItem>
                             <FormLabel>Gender</FormLabel>
                             <FormControl>
-                                <Input placeholder="shadcn" {...field} />
+                                <Input {...field} />
                             </FormControl>
                             <FormDescription>
                             </FormDescription>

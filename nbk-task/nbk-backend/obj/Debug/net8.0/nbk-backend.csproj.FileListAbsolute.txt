@@ -157,3 +157,4 @@
 /Users/mason/Desktop/2024Dev/NBK/NBK-Task/nbk-task/nbk-backend/obj/Debug/net8.0/nbk-back.04ECDFE8.Up2Date
 /Users/mason/Desktop/2024Dev/NBK/NBK-Task/nbk-task/nbk-backend/bin/Debug/net8.0/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore.dll
 /Users/mason/Desktop/2024Dev/NBK/NBK-Task/nbk-task/nbk-backend/bin/Debug/net8.0/Microsoft.EntityFrameworkCore.InMemory.dll
+/Users/mason/Desktop/2024Dev/NBK/NBK-Task/nbk-task/nbk-backend/bin/Debug/net8.0/Data/nbk-database.db
