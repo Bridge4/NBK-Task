@@ -161,7 +161,6 @@
 C:\dev\NBK-Task\nbk-task\nbk-backend\bin\Debug\net8.0\appsettings.Development.json
 C:\dev\NBK-Task\nbk-task\nbk-backend\bin\Debug\net8.0\appsettings.json
 C:\dev\NBK-Task\nbk-task\nbk-backend\bin\Debug\net8.0\Data\nbk-database.db
-C:\dev\NBK-Task\nbk-task\nbk-backend\bin\Debug\net8.0\global.json
 C:\dev\NBK-Task\nbk-task\nbk-backend\bin\Debug\net8.0\nbk-backend.exe
 C:\dev\NBK-Task\nbk-task\nbk-backend\bin\Debug\net8.0\nbk-backend.deps.json
 C:\dev\NBK-Task\nbk-task\nbk-backend\bin\Debug\net8.0\nbk-backend.runtimeconfig.json

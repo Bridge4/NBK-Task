@@ -5,6 +5,9 @@ import { ColumnDef } from "@tanstack/react-table"
 import { AddCustomerDialog } from "../components/AddCustomerDialog"
 import { EditDialog } from "../components/EditDialog"
 import { useState } from "react"
+import { useRouter } from "next/navigation"
+import { DeleteButton } from "../components/DeleteButton"
+
 
 export type Customer = {
   customerNumber: number
@@ -48,6 +51,7 @@ export const columns: ColumnDef<Customer>[] = [
             const customerGender = thisRow[0].row.original.gender
 
             function deleteEntry(){
+                const router = useRouter()
                 console.log("DELETING")
                 fetch("http://localhost:5230/customers/" + customerID, {
                     method: 'DELETE',
@@ -58,14 +62,17 @@ export const columns: ColumnDef<Customer>[] = [
                 .then(response => response.json())
                 .then(data => console.log(data))
                 .catch(error => console.error(error));
+                router.refresh()
             }
             return (
                 <div>
                     <EditDialog customerNumber={customerID} name={customerName} age={customerAge} 
-                                DOB={customerDOB} gender={customerGender}></EditDialog>
-                    <Button variant={"destructive"} onClick={deleteEntry} className="container mx-auto py-1">Delete</Button>
+                        DOB={customerDOB} gender={customerGender}></EditDialog>
+                    
+                    <DeleteButton customerID={customerID}></DeleteButton>
                 </div>
             )
         }
     }
+    //<Button variant={"destructive"} onClick={deleteEntry} className="container mx-auto py-1" >Delete</Button>
 ]

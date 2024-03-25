@@ -27,10 +27,8 @@ export default withPageAuthRequired(
                     <a href="/api/auth/logout">Logout</a>
                 </Button>
             <div className="container mx-auto py-10">
-                
                 <DataTable columns={columns} data={data}></DataTable>
                 <AddCustomerDialog></AddCustomerDialog>
-                
             </div>
             </>
         )

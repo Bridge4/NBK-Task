@@ -22,6 +22,8 @@ import {
     PopoverTrigger,
   } from "./ui/popover"
 import { CalendarIcon } from "@radix-ui/react-icons"
+import { useRouter } from "next/navigation";
+
 
 const formSchema = z.object({
     customerName: z.string(),
@@ -31,6 +33,7 @@ const formSchema = z.object({
 })
 
 export function EditForm({...props}){
+    const router = useRouter()
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema), 
         defaultValues:
@@ -61,6 +64,7 @@ export function EditForm({...props}){
         .then(response => response.json())
         .then(data => console.log(data))
         .catch(error => console.error(error));
+        router.refresh()
     }
     
     return (

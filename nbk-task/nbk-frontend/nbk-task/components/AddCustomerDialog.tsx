@@ -32,6 +32,7 @@ import {
     PopoverTrigger,
   } from "./ui/popover"
 import { CalendarIcon } from "@radix-ui/react-icons"
+import { useRouter } from "next/navigation"
 
 const formSchema = z.object({
     customerNumber: z.coerce.number(),
@@ -42,6 +43,10 @@ const formSchema = z.object({
 })
 
 export function AddCustomerDialog() {
+
+
+    const router = useRouter()
+
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema), 
     })
@@ -65,7 +70,10 @@ export function AddCustomerDialog() {
         }).then(response => response.json())
         .then(data => console.log(data))
         .catch(error => console.error(error));
+        router.refresh()
     }
+
+
     return (
         <Dialog>
         <DialogTrigger asChild>
